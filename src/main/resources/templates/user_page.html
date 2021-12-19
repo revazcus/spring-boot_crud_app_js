@@ -1,27 +1,72 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
 </head>
-<body>
-<table border="1">
-    <thead>
-    <h2> Страница пользователя <span th:text="${user.getUsername()}">name</span></h2>
-    <tr>
-        <th>Username</th>
-        <th>Password</th>
-        <th>Role</th>
-    </tr>
-    </thead>
-    <tbody>
-        <td th:text="${user.getUsername()}"></td>
-        <td th:text="${user.getPassword()}"></td>
-        <td th:text="${user.getRoles()}"></td>
-    </tbody>
-</table>
+<div id="wrapper" style="height: 100%">
+    <div class="container-fluid" style="height: 100%">
+        <div class="row" id="navbarHead" style="height: 7%">
+            <div class="col p-0 m-0">
+                <nav class="navbar navbar-dark bg-dark align-content-stretch" id="navbar">
+                    <div><h5 style="color: lightgray"><span th:utext="|${user.email}|"></span><b> with roles: </b>
+                        <a th:each="role :${user.getRoles()}" th:text="${role.getRole()} + ' '"></a></div>
+                    <form th:action="@{/logout}" method="post" style="border: 0 none;outline: none">
+                        <input type="submit" value="Logout" style="all: unset; color: lightgray; cursor: pointer"/>
+                    </form>
+                </nav>
+            </div>
+        </div>
+        <div class="row" id="content" style="height: 93%">
+            <div class="col-3 bg-light">
+                <div id="sidebar">
+                    <div sec:authorize="hasAuthority('ADMIN')" class="active"><a th:href="@{/admin/}" style="text-decoration: none;">Admin</a></div>
+                    <div class="btn-primary" ><a th:href="@{/user/}" style="text-decoration: none; color: whitesmoke; text-underline: none">User</a></div>
+                </div>
+            </div>
+            <div class="col-9">
+                <div style="padding-top: 10px; padding-left: 10px;"><h2 style="margin-bottom: -12px">User
+                    information-page</h2>
+                    <br>
+                    <div class="card">
+                        <div class="card-header font-weight-bold"><h4>About user</h4></div>
+                        <div class="card-body">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Age</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td th:text="${user.id}"></td>
+                                    <td th:text="${user.firstName}"></td>
+                                    <td th:text="${user.lastName}"></td>
+                                    <td th:text="${user.age}"></td>
+                                    <td th:text="${user.email}"></td>
+                                    <td> <a th:each="role :${user.roles}" th:text="${role.getRole()} + ' '"></a></td>
+                                    <td>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
-<form th:method="GET" action="/logout">
-    <input type="submit" value="Exit">
-</form>
 </html>

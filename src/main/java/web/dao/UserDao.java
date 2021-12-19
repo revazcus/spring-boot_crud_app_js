@@ -8,7 +8,7 @@ import web.models.User;
 
 @Repository
 public interface UserDao extends JpaRepository<User, Long> {
-    @Query("SELECT u FROM User u where u.username = :username")
-    User getUserByUsername(@Param("username") String username);
+    @Query("SELECT u FROM User u where u.email = :email")
+    User getUserByUsername(@Param("email") String email);
 
 }

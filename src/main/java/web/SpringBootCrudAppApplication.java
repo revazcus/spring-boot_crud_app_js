@@ -39,13 +39,14 @@ public class SpringBootCrudAppApplication extends SpringBootServletInitializer i
 
         Set<Role> roleSet = new HashSet<>();
         roleSet.add(roleService.getRoleByRoleName("ADMIN"));
+        roleSet.add(roleService.getRoleByRoleName("USER"));
 
         Set<Role> roleSetUser = new HashSet<>();
         roleSetUser.add(roleService.getRoleByRoleName("USER"));
 
-        User admin = new User(1,"admin","admin",roleSet);
+        User admin = new User(1, "admin@mail.ru", "admin","admin", 24, "admin", roleSet);
 
-        User user = new User(2, "user", "user", roleSetUser);
+        User user = new User(2, "user@mail.ru", "user", "user", 25, "user", roleSetUser);
 
         userService.addUser(admin);
         userService.addUser(user);
