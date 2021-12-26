@@ -40,8 +40,8 @@
         <div class="row" id="content" style="height: 93%">
             <div class="col-3">
                 <div id="sidebar">
-                    <div class="btn-primary" ><a th:href="@{/user/}" style="text-decoration: none; color: whitesmoke; text-underline: none">USER</a></div>
-                    <div sec:authorize="hasAuthority('ADMIN')" class="active"><a th:href="@{/admin/}" style="text-decoration: none;">ADMIN</a></div>
+                    <div sec:authorize="hasAuthority('ADMIN')" class="active"><a th:href="@{/admin/}" style="text-decoration: none;">Admin</a></div>
+                    <div class="btn-primary" ><a th:href="@{/user/}" style="text-decoration: none; color: whitesmoke; text-underline: none">User</a></div>
                 </div>
             </div>
             <div class="col-9 bg-light">

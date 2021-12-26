@@ -74,23 +74,25 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     /*$(document).on('click', 'button.deleteUser',function (event){ //modal delete
         event.preventDefault();
-        let uid = $(this).parents("tr").attr("id");
+        let uId = $(this).parents("tr").attr("id");
         $('.modal-title').text("Delete User")
         $('button.updateUser').css('display','none')
         $('button.confirmDelete').css('display','inline-block')
-        api.getUser(uid).then(user => {
-            $('#modalEditForm #editId').val(uid);
+        api.getUser(uId).then(user => {
+            $('#modalEditForm #editId').val(uId);
             $('#modalEditForm #firstName').val(user.firstName).attr('readonly', true);
             $('#modalEditForm #lastName').val(user.lastName).attr('readonly', true);
             $('#modalEditForm #age').val(user.age).attr('readonly', true);
             $('#modalEditForm #email').val(user.email).attr('readonly', true);
             $('#modalEditForm #password').val(user.password).attr('readonly', true);
             $('#modalEditForm #editRole').attr('disabled', true);
-            $('.userEditForm').modal();
+            $('.modalDeleteForm').modal();
         })
-    })
+    })*/
 
-    $('.btn.confirmDelete').click(async function () { //удаление пользователя
+
+
+    /*$('.btn.confirmDelete').click(async function () { //удаление пользователя
         let form = document.querySelector("#modalEditForm");
         let formData = new FormData(form);
         let obj = Object.fromEntries(formData);
@@ -100,8 +102,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
         })
         $('.btn.editModalClose').click()
     })*/
-/*
-    //Display input form
+
+
     document.querySelector("button.showUserForm").addEventListener("click", function (){ //смена вкладки на таблицу пользователей
         document.querySelector(".topButtons.onFocus").classList.remove("onFocus");
         this.classList.add("onFocus");
@@ -117,7 +119,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         document.querySelector(".cardAddUserForm").style.display = "none";
     })
 
-    $('.btn.addUser').click(async function () { //добавление
+    /*$('.btn.addUser').click(async function () { //добавление
         let form = document.querySelector("#addUserForm");
         let formData = new FormData(form);
         let obj = Object.fromEntries(formData);
