@@ -1,7 +1,6 @@
 package web.models;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -36,7 +35,7 @@ public class User implements UserDetails {
     private String password;
 
     @Transient
-    private String roleSetTemp;
+    private String[] roleSetTemp;
 
 
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
@@ -105,11 +104,11 @@ public class User implements UserDetails {
         }
     }
 
-    public String getRoleSetTemp() {
+    public String[] getRoleSetTemp() {
         return roleSetTemp;
     }
 
-    public void setRoleSetTemp(String roleSetTemp) {
+    public void setRoleSetTemp(String[] roleSetTemp) {
         this.roleSetTemp = roleSetTemp;
     }
 

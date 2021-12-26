@@ -54,7 +54,7 @@
             <div class="col p-0 m-0">
                 <nav class="navbar navbar-dark bg-dark align-content-stretch" id="navbar">
                     <div><h5 style="color: lightgray"><span th:utext="|${admin.getEmail()}|"></span><b> with roles: </b>
-                        <a th:each="role :${admin.roles}" th:text="${role.getRole()} + ' '"></a></div>
+                        <a th:each="role :${admin.roles}" th:text="${role.getRole()} + ' '"></a></h5></div>
                     <form th:action="@{/logout}" method="post" style="border: 0 none;outline: none">
                         <input type="submit" value="Logout" style="all: unset; color: lightgray; cursor: pointer" />
                     </form>
@@ -101,23 +101,23 @@
                             <form style="display: grid" id="addUserForm" action="/admin/api/users" method="post">
                                 <div class="form-group">
                                     <label for="firstName">First Name</label>
-                                    <input type="text" class="form-control firstName" name="firstName" placeholder="Input firstName">
+                                    <input type="text" class="form-control firstName" name="firstName" placeholder="First Name">
                                 </div>
                                 <div class="form-group">
                                     <label for="lastName">Last name</label>
-                                    <input type="text" class="form-control lastName" name="lastName" placeholder="Input last name">
+                                    <input type="text" class="form-control lastName" name="lastName" placeholder="Last name">
                                 </div>
                                 <div class="form-group">
                                     <label for="age">Age</label>
-                                    <input type="number" class="form-control age" name="age" placeholder="Input age">
+                                    <input type="number" class="form-control age" name="age" placeholder="Age">
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Email</label>
-                                    <input type="email" class="form-control email" name="email" placeholder="Input email">
+                                    <input type="email" class="form-control email" name="email" placeholder="Email">
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Password</label>
-                                    <input type="password" class="form-control password" name="password" placeholder="Set password">
+                                    <input type="password" class="form-control password" name="password" placeholder="Password">
                                 </div>
 
                                 <div class="form-group">
@@ -156,23 +156,23 @@
                         </div>
                         <div class="form-group text-center modalForm">
                             <label for="firstName">First Name</label>
-                            <input type="text" class="form-control" id="firstName" name="firstName"  placeholder="Input firstName">
+                            <input type="text" class="form-control" id="firstName" name="firstName"  placeholder="First Name">
                         </div>
                         <div class="form-group text-center modalForm">
                             <label for="lastName">Last name</label>
-                            <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Input last name">
+                            <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last name">
                         </div>
                         <div class="form-group text-center modalForm">
                             <label for="age">Age</label>
-                            <input type="number" class="form-control" id="age" name="age" placeholder="Input age">
+                            <input type="number" class="form-control" id="age" name="age" placeholder="Age">
                         </div>
                         <div class="form-group text-center modalForm">
                             <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Input email">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Email">
                         </div>
                         <div class="form-group text-center modalForm">
                             <label for="password">Password</label>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Set password">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                         </div>
 
                         <div class="form-group text-center modalForm">
@@ -194,20 +194,57 @@
         </div>
     </div>
 </div>
-<!--Form-->
-<div style="display: grid" class="modalDeleteForm"><!-- Modal -->
-    <div class="modal" id="exampleModalDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div><!-- Modal -->
+    <div class="modal userDeleteForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelDelete" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" >Delete User</h5>
+                    <h5 class="modal-title" id="exampleModalLabelDelete">Edit User</h5>
                     <button type="button" class="close" data-dismiss="modal" data-target="#editUser" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body d-flex justify-content-center flex-column p-0" id="modal">
+                <div class="modal-body d-flex justify-content-center flex-column">
+                    <form method="post" style="display: grid; margin: auto; width: 280px" id="modalDeleteForm" action="">
+                        <div class="form-group text-center modalForm">
+                            <label>ID</label>
+                            <input readonly type="number" name="id" id="editId1" class="form-control">
+                        </div>
+                        <div class="form-group text-center modalForm">
+                            <label for="firstName">First Name</label>
+                            <input type="text" class="form-control" id="firstName1" name="firstName">
+                        </div>
+                        <div class="form-group text-center modalForm">
+                            <label for="lastName">Last name</label>
+                            <input type="text" class="form-control" id="lastName1" name="lastName">
+                        </div>
+                        <div class="form-group text-center modalForm">
+                            <label for="age">Age</label>
+                            <input type="number" class="form-control" id="age1" name="age">
+                        </div>
+                        <div class="form-group text-center modalForm">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email1" name="email">
+                        </div>
+                        <div class="form-group text-center modalForm">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="password1" name="password">
+                        </div>
+
+                        <div class="form-group text-center modalForm">
+                            <label for="editRole">Role</label>
+                            <select class="custom-select roleSelect" name="roleSetTemp" multiple id="editRole1" required>
+                                <option value="USER">User</option>
+                                <option value="ADMIN">Admin</option>
+                            </select>
+                        </div>
+                    </form>
+                    <br/>
                 </div>
                 <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary editModalClose" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-info updateUser">Accept</button>
+                    <button type="button" class="btn btn-danger confirmDelete" style="display: none">Delete user</button>
                 </div>
             </div>
         </div>

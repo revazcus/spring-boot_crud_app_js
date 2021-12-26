@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         obj.roleSetTemp = $("#editRole").val();
         console.log(obj)
         if (obj.roleSetTemp.length === 0) {
-            alert("Выберите роль")
+            alert("Выберите роль!")
         } else {
             api.editUser(obj).then(res => res.json()).then(res => {
                 let tr = $('tr#' + obj.id)
@@ -72,28 +72,28 @@ document.addEventListener("DOMContentLoaded", function(event) {
         }
     })
 
-    /*$(document).on('click', 'button.deleteUser',function (event){ //modal delete
+    $(document).on('click', 'button.deleteUser',function (event){ //modal delete
         event.preventDefault();
-        let uId = $(this).parents("tr").attr("id");
+        let uid = $(this).parents("tr").attr("id");
         $('.modal-title').text("Delete User")
         $('button.updateUser').css('display','none')
         $('button.confirmDelete').css('display','inline-block')
-        api.getUser(uId).then(user => {
-            $('#modalEditForm #editId').val(uId);
-            $('#modalEditForm #firstName').val(user.firstName).attr('readonly', true);
-            $('#modalEditForm #lastName').val(user.lastName).attr('readonly', true);
-            $('#modalEditForm #age').val(user.age).attr('readonly', true);
-            $('#modalEditForm #email').val(user.email).attr('readonly', true);
-            $('#modalEditForm #password').val(user.password).attr('readonly', true);
-            $('#modalEditForm #editRole').attr('disabled', true);
-            $('.modalDeleteForm').modal();
+        api.getUser(uid).then(user => {
+            $('#modalDeleteForm #editId1').val(uid);
+            $('#modalDeleteForm #firstName1').val(user.name).attr('readonly', true);
+            $('#modalDeleteForm #lastName1').val(user.lastName).attr('readonly', true);
+            $('#modalDeleteForm #age1').val(user.age).attr('readonly', true);
+            $('#modalDeleteForm #email1').val(user.email).attr('readonly', true);
+            $('#modalDeleteForm #password1').val(user.password).attr('readonly', true);
+            $('#modalDeleteForm #editRole1').attr('disabled', true);
+            $('.userDeleteForm').modal();
         })
-    })*/
+    })
 
 
 
-    /*$('.btn.confirmDelete').click(async function () { //удаление пользователя
-        let form = document.querySelector("#modalEditForm");
+    $('.btn.confirmDelete').click(async function () { //Удаление Юзера
+        let form = document.querySelector("#modalDeleteForm");
         let formData = new FormData(form);
         let obj = Object.fromEntries(formData);
         api.deleteUser(obj.id).then(res => {
@@ -101,10 +101,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
             tr.remove();
         })
         $('.btn.editModalClose').click()
-    })*/
+    })
 
 
-    document.querySelector("button.showUserForm").addEventListener("click", function (){ //смена вкладки на таблицу пользователей
+    document.querySelector("button.showUserForm").addEventListener("click", function (){ //Смена вкладки на таблицу Юзеров
         document.querySelector(".topButtons.onFocus").classList.remove("onFocus");
         this.classList.add("onFocus");
         document.querySelector(".cardUserList").style.display = "none";
@@ -112,26 +112,27 @@ document.addEventListener("DOMContentLoaded", function(event) {
     })
 
 
-    document.querySelector("button.showUsers").addEventListener("click", function (){ //смена вкладки на форму нового пользователя
+    document.querySelector("button.showUsers").addEventListener("click", function (){ //Смена вкладки на форму нового Юзера
         document.querySelector(".topButtons.onFocus").classList.remove("onFocus");
         this.classList.add("onFocus");
         document.querySelector(".cardUserList").style.display = "flex";
         document.querySelector(".cardAddUserForm").style.display = "none";
     })
 
-    /*$('.btn.addUser').click(async function () { //добавление
+    $('.btn.addUser').click(async function () { //Добавление Юзера
         let form = document.querySelector("#addUserForm");
         let formData = new FormData(form);
         let obj = Object.fromEntries(formData);
-        obj.roleSetTemp = $(".roleSelect").val(); //console.log(obj)
+        obj.roleSetTemp = $(".roleSelect").val();
         if (obj.roleSetTemp.length === 0){
-            alert("Дайте вашему новому пользователю роли!")
+            alert("Выберите роль!")
         } else {
             api.addUser(obj).then(res => res.json()).then(res => {
                 api.showUsers([res])
+                alert("Пользователь успешно добавлен!")
             })
         }
-    })*/
+    })
 
 
 })

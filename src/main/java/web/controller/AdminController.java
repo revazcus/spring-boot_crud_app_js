@@ -51,19 +51,16 @@ public class AdminController {
     }
 
     @PostMapping("/api/users")
-    public ResponseEntity<User> newUser(@RequestBody User user,
-                                        @RequestParam(required = false) String[] auth) {
+    public ResponseEntity<User> newUser(@RequestBody User user) {
         Set<Role> roleSet = new HashSet<>();
         Role adminRole = roleService.getRoleByRoleName("ADMIN");
         Role userRole = roleService.getRoleByRoleName("USER");
-        if (adminRole.toString().equals(auth[0])) {
+        if (user.getRoleSetTemp().length == 2) {
             roleSet.add(adminRole);
-        }
-        if (userRole.toString().equals(auth[0])) {
             roleSet.add(userRole);
-        }
-        if (auth.length == 2) {
+        } if (user.getRoleSetTemp()[0].equals("ADMIN")){
             roleSet.add(adminRole);
+        } else {
             roleSet.add(userRole);
         }
         user.setRoles(roleSet);
@@ -76,8 +73,14 @@ public class AdminController {
         Set<Role> roleSet = new HashSet<>();
         Role adminRole = roleService.getRoleByRoleName("ADMIN");
         Role userRole = roleService.getRoleByRoleName("USER");
-        roleSet.add(adminRole);
-        roleSet.add(userRole);
+        if (user.getRoleSetTemp().length == 2) {
+            roleSet.add(adminRole);
+            roleSet.add(userRole);
+        } if (user.getRoleSetTemp()[0].equals("ADMIN")){
+            roleSet.add(adminRole);
+        } else {
+            roleSet.add(userRole);
+        }
         user.setRoles(roleSet);
         userService.updateUser(user.getId(), user);
         return new ResponseEntity<>(user, HttpStatus.OK);
@@ -87,5 +90,14 @@ public class AdminController {
     public ResponseEntity deleteUser(@PathVariable("id") long id) {
         userService.deleteUserById(id);
         return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ModelAndView addressLineUserPage (@PathVariable("id") long id){
+        User user = userService.findById(id);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("user");
+        modelAndView.addObject("user", user);
+        return modelAndView;
     }
 }

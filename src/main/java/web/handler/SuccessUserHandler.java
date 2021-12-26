@@ -1,4 +1,4 @@
-package web.config;
+package web.handler;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
