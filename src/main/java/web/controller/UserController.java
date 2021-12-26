@@ -17,6 +17,6 @@ public class UserController {
     public String userPage (Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("user", user);
-        return "user_page";
+        return "user";
     }
 }

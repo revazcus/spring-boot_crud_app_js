@@ -34,6 +34,10 @@ public class User implements UserDetails {
     @Column
     private String password;
 
+    @Transient
+    private String roleSetTemp;
+
+
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
@@ -89,6 +93,23 @@ public class User implements UserDetails {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public String getRole(){
+        if (this.roles.size() == 2) {
+            return roles.toArray()[0].toString() + " " + roles.toArray()[1].toString();
+        }
+        else {
+            return roles.toArray()[0].toString();
+        }
+    }
+
+    public String getRoleSetTemp() {
+        return roleSetTemp;
+    }
+
+    public void setRoleSetTemp(String roleSetTemp) {
+        this.roleSetTemp = roleSetTemp;
     }
 
     @Override
